@@ -1,0 +1,31 @@
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_ollama import OllamaEmbeddings
+from langchain_community.vectorstores import FAISS
+
+
+loader = PyPDFLoader('안전관리실무_편집본.pdf')
+pages = loader.load()
+print(f'총 페이지 수: {len(pages)}')
+
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+docs = text_splitter.split_documents(pages)
+print(f'총 청크 수: {len(docs)}')
+print(docs[0].page_content[:200])
+
+
+embeddings = OllamaEmbeddings(model='nomic-embed-text')
+vectorstore = FAISS.from_documents(docs, embeddings)
+
+# 유사도 검색 테스트
+results = vectorstore.similarity_search('안전 관리', k=3)
+results2 = vectorstore.similarity_search('연안사고 예방', k=3)
+print("-"*50)
+
+for r in results:
+    print(r.page_content[:100])
+    print("="*50)
+print("-"*50)
+for r in results2:
+    print(r.page_content[:100])
+    print("="*50)

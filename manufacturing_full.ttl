@@ -1,0 +1,113 @@
+@prefix mfg: <http://manufacturing.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+mfg:가공공정1 a mfg:공정 ;
+    rdfs:label "가공공정1"@ko ;
+    mfg:공정번호 "P002" ;
+    mfg:담당한다 mfg:김철수 ;
+    mfg:사용한다 mfg:용접기B ;
+    mfg:작업시간 60 .
+
+mfg:검사공정1 a mfg:공정 ;
+    rdfs:label "검사공정1"@ko ;
+    mfg:공정번호 "P003" ;
+    mfg:담당한다 mfg:이영희 ;
+    mfg:사용한다 mfg:검사장비C ;
+    mfg:작업시간 15 .
+
+mfg:공정번호 a owl:DatatypeProperty .
+
+mfg:담당한다 a owl:ObjectProperty .
+
+mfg:무게 a owl:DatatypeProperty .
+
+mfg:발생한다 a owl:ObjectProperty .
+
+mfg:불량율 a owl:DatatypeProperty .
+
+mfg:사용한다 a owl:ObjectProperty .
+
+mfg:산업용펌프 a mfg:제품 ;
+    rdfs:label "산업용펌프"@ko ;
+    mfg:무게 "50.0"^^xsd:float ;
+    mfg:포함한다 mfg:모터,
+        mfg:임펠러,
+        mfg:케이싱 .
+
+mfg:압력펌프 a mfg:제품 ;
+    rdfs:label "압력펌프"@ko ;
+    mfg:무게 "45.0"^^xsd:float .
+
+mfg:작업시간 a owl:DatatypeProperty .
+
+mfg:제조사 a owl:DatatypeProperty .
+
+mfg:조립공정1 a mfg:공정 ;
+    rdfs:label "조립공정1"@ko ;
+    mfg:공정번호 "P001" ;
+    mfg:담당한다 mfg:홍길동 ;
+    mfg:사용한다 mfg:선반기계A ;
+    mfg:작업시간 30 .
+
+mfg:포함한다 a owl:ObjectProperty .
+
+mfg:검사장비C a mfg:설비 ;
+    rdfs:label "검사장비C"@ko .
+
+mfg:김철수 a mfg:작업자 ;
+    rdfs:label "김철수"@ko .
+
+mfg:모터 a mfg:부품 ;
+    rdfs:label "모터"@ko ;
+    mfg:무게 "5.0"^^xsd:float ;
+    mfg:포함한다 mfg:베어링,
+        mfg:샤프트 .
+
+mfg:베어링 a mfg:부품 ;
+    rdfs:label "베어링"@ko ;
+    mfg:무게 "0.5"^^xsd:float ;
+    mfg:발생한다 mfg:불량001 .
+
+mfg:불량 a owl:Class .
+
+mfg:불량001 a mfg:불량 ;
+    rdfs:label "베어링 마모"@ko ;
+    mfg:불량율 "0.05"^^xsd:float .
+
+mfg:샤프트 a mfg:부품 ;
+    rdfs:label "샤프트"@ko ;
+    mfg:무게 "1.5"^^xsd:float .
+
+mfg:선반기계A a mfg:설비 ;
+    rdfs:label "선반기계A"@ko .
+
+mfg:용접기B a mfg:설비 ;
+    rdfs:label "용접기B"@ko .
+
+mfg:이영희 a mfg:작업자 ;
+    rdfs:label "이영희"@ko .
+
+mfg:임펠러 a mfg:부품 ;
+    rdfs:label "임펠러"@ko ;
+    mfg:무게 "2.0"^^xsd:float .
+
+mfg:케이싱 a mfg:부품 ;
+    rdfs:label "케이싱"@ko ;
+    mfg:무게 "8.0"^^xsd:float .
+
+mfg:홍길동 a mfg:작업자 ;
+    rdfs:label "홍길동"@ko .
+
+mfg:공정 a owl:Class .
+
+mfg:설비 a owl:Class .
+
+mfg:작업자 a owl:Class .
+
+mfg:제품 a owl:Class .
+
+mfg:부품 a owl:Class ;
+    rdfs:subClassOf mfg:제품 .
+

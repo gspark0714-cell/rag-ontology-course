@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:mfg="http://manufacturing.org/ontology#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#조립공정1">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#공정"/>
+    <rdfs:label xml:lang="ko">조립공정1</rdfs:label>
+    <mfg:공정번호>P001</mfg:공정번호>
+    <mfg:작업시간 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">30</mfg:작업시간>
+    <mfg:사용한다 rdf:resource="http://manufacturing.org/ontology#선반기계A"/>
+    <mfg:담당한다 rdf:resource="http://manufacturing.org/ontology#홍길동"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#산업용펌프">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#제품"/>
+    <rdfs:label xml:lang="ko">산업용펌프</rdfs:label>
+    <mfg:무게 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">50.0</mfg:무게>
+    <mfg:포함한다 rdf:resource="http://manufacturing.org/ontology#모터"/>
+    <mfg:포함한다 rdf:resource="http://manufacturing.org/ontology#임펠러"/>
+    <mfg:포함한다 rdf:resource="http://manufacturing.org/ontology#케이싱"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#베어링">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#부품"/>
+    <rdfs:label xml:lang="ko">베어링</rdfs:label>
+    <mfg:무게 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.5</mfg:무게>
+    <mfg:발생한다 rdf:resource="http://manufacturing.org/ontology#불량001"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#발생한다">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#가공공정1">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#공정"/>
+    <rdfs:label xml:lang="ko">가공공정1</rdfs:label>
+    <mfg:공정번호>P002</mfg:공정번호>
+    <mfg:작업시간 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">60</mfg:작업시간>
+    <mfg:사용한다 rdf:resource="http://manufacturing.org/ontology#용접기B"/>
+    <mfg:담당한다 rdf:resource="http://manufacturing.org/ontology#김철수"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#불량율">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#임펠러">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#부품"/>
+    <rdfs:label xml:lang="ko">임펠러</rdfs:label>
+    <mfg:무게 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.0</mfg:무게>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#검사공정1">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#공정"/>
+    <rdfs:label xml:lang="ko">검사공정1</rdfs:label>
+    <mfg:공정번호>P003</mfg:공정번호>
+    <mfg:작업시간 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">15</mfg:작업시간>
+    <mfg:사용한다 rdf:resource="http://manufacturing.org/ontology#검사장비C"/>
+    <mfg:담당한다 rdf:resource="http://manufacturing.org/ontology#이영희"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#작업시간">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#부품">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://manufacturing.org/ontology#제품"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#압력펌프">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#제품"/>
+    <rdfs:label xml:lang="ko">압력펌프</rdfs:label>
+    <mfg:무게 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">45.0</mfg:무게>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#케이싱">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#부품"/>
+    <rdfs:label xml:lang="ko">케이싱</rdfs:label>
+    <mfg:무게 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">8.0</mfg:무게>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#설비">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#검사장비C">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#설비"/>
+    <rdfs:label xml:lang="ko">검사장비C</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#불량001">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#불량"/>
+    <rdfs:label xml:lang="ko">베어링 마모</rdfs:label>
+    <mfg:불량율 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.05</mfg:불량율>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#샤프트">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#부품"/>
+    <rdfs:label xml:lang="ko">샤프트</rdfs:label>
+    <mfg:무게 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1.5</mfg:무게>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#홍길동">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#작업자"/>
+    <rdfs:label xml:lang="ko">홍길동</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#제품">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#선반기계A">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#설비"/>
+    <rdfs:label xml:lang="ko">선반기계A</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#사용한다">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#김철수">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#작업자"/>
+    <rdfs:label xml:lang="ko">김철수</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#이영희">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#작업자"/>
+    <rdfs:label xml:lang="ko">이영희</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#담당한다">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#모터">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#부품"/>
+    <rdfs:label xml:lang="ko">모터</rdfs:label>
+    <mfg:무게 rdf:datatype="http://www.w3.org/2001/XMLSchema#float">5.0</mfg:무게>
+    <mfg:포함한다 rdf:resource="http://manufacturing.org/ontology#베어링"/>
+    <mfg:포함한다 rdf:resource="http://manufacturing.org/ontology#샤프트"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#제조사">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#포함한다">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#불량">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#용접기B">
+    <rdf:type rdf:resource="http://manufacturing.org/ontology#설비"/>
+    <rdfs:label xml:lang="ko">용접기B</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#공정번호">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#공정">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#작업자">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://manufacturing.org/ontology#무게">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,436 @@
+[
+  {
+    "@id": "http://manufacturing.org/ontology#홍길동",
+    "@type": [
+      "http://manufacturing.org/ontology#작업자"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "홍길동"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#베어링",
+    "@type": [
+      "http://manufacturing.org/ontology#부품"
+    ],
+    "http://manufacturing.org/ontology#무게": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#float",
+        "@value": "0.5"
+      }
+    ],
+    "http://manufacturing.org/ontology#발생한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#불량001"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "베어링"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#샤프트",
+    "@type": [
+      "http://manufacturing.org/ontology#부품"
+    ],
+    "http://manufacturing.org/ontology#무게": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#float",
+        "@value": "1.5"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "샤프트"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#포함한다",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#ObjectProperty"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#담당한다",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#ObjectProperty"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#모터",
+    "@type": [
+      "http://manufacturing.org/ontology#부품"
+    ],
+    "http://manufacturing.org/ontology#무게": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#float",
+        "@value": "5.0"
+      }
+    ],
+    "http://manufacturing.org/ontology#포함한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#베어링"
+      },
+      {
+        "@id": "http://manufacturing.org/ontology#샤프트"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "모터"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#공정번호",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#DatatypeProperty"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#조립공정1",
+    "@type": [
+      "http://manufacturing.org/ontology#공정"
+    ],
+    "http://manufacturing.org/ontology#공정번호": [
+      {
+        "@value": "P001"
+      }
+    ],
+    "http://manufacturing.org/ontology#담당한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#홍길동"
+      }
+    ],
+    "http://manufacturing.org/ontology#사용한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#선반기계A"
+      }
+    ],
+    "http://manufacturing.org/ontology#작업시간": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 30
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "조립공정1"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#압력펌프",
+    "@type": [
+      "http://manufacturing.org/ontology#제품"
+    ],
+    "http://manufacturing.org/ontology#무게": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#float",
+        "@value": "45.0"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "압력펌프"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#산업용펌프",
+    "@type": [
+      "http://manufacturing.org/ontology#제품"
+    ],
+    "http://manufacturing.org/ontology#무게": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#float",
+        "@value": "50.0"
+      }
+    ],
+    "http://manufacturing.org/ontology#포함한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#모터"
+      },
+      {
+        "@id": "http://manufacturing.org/ontology#임펠러"
+      },
+      {
+        "@id": "http://manufacturing.org/ontology#케이싱"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "산업용펌프"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#선반기계A",
+    "@type": [
+      "http://manufacturing.org/ontology#설비"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "선반기계A"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#사용한다",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#ObjectProperty"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#검사장비C",
+    "@type": [
+      "http://manufacturing.org/ontology#설비"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "검사장비C"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#작업자",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#발생한다",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#ObjectProperty"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#가공공정1",
+    "@type": [
+      "http://manufacturing.org/ontology#공정"
+    ],
+    "http://manufacturing.org/ontology#공정번호": [
+      {
+        "@value": "P002"
+      }
+    ],
+    "http://manufacturing.org/ontology#담당한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#김철수"
+      }
+    ],
+    "http://manufacturing.org/ontology#사용한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#용접기B"
+      }
+    ],
+    "http://manufacturing.org/ontology#작업시간": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 60
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "가공공정1"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#불량",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#작업시간",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#DatatypeProperty"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#이영희",
+    "@type": [
+      "http://manufacturing.org/ontology#작업자"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "이영희"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#설비",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#검사공정1",
+    "@type": [
+      "http://manufacturing.org/ontology#공정"
+    ],
+    "http://manufacturing.org/ontology#공정번호": [
+      {
+        "@value": "P003"
+      }
+    ],
+    "http://manufacturing.org/ontology#담당한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#이영희"
+      }
+    ],
+    "http://manufacturing.org/ontology#사용한다": [
+      {
+        "@id": "http://manufacturing.org/ontology#검사장비C"
+      }
+    ],
+    "http://manufacturing.org/ontology#작업시간": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 15
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "검사공정1"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#불량001",
+    "@type": [
+      "http://manufacturing.org/ontology#불량"
+    ],
+    "http://manufacturing.org/ontology#불량율": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#float",
+        "@value": "0.05"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "베어링 마모"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#공정",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#김철수",
+    "@type": [
+      "http://manufacturing.org/ontology#작업자"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "김철수"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#케이싱",
+    "@type": [
+      "http://manufacturing.org/ontology#부품"
+    ],
+    "http://manufacturing.org/ontology#무게": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#float",
+        "@value": "8.0"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "케이싱"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#부품",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "http://manufacturing.org/ontology#제품"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#제품",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Class"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#용접기B",
+    "@type": [
+      "http://manufacturing.org/ontology#설비"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "용접기B"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#제조사",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#DatatypeProperty"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#임펠러",
+    "@type": [
+      "http://manufacturing.org/ontology#부품"
+    ],
+    "http://manufacturing.org/ontology#무게": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#float",
+        "@value": "2.0"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "ko",
+        "@value": "임펠러"
+      }
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#불량율",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#DatatypeProperty"
+    ]
+  },
+  {
+    "@id": "http://manufacturing.org/ontology#무게",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#DatatypeProperty"
+    ]
+  }
+]
