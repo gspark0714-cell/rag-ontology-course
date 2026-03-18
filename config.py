@@ -1,3 +1,5 @@
+#python -m pip install langchain langchain-community langchain-text-splitters langchain-ollama langchain-classic faiss-cpu pypdf 패키지 설치 후 테스트
+
 # config.py — 모든 실습 파일에서 공통으로 불러쓰는 설정
 
 def get_llm():
