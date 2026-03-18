@@ -1,0 +1,88 @@
+# ── CoastalAccident 계층 ──────────────────────────────
+
+:CoastalAccident rdf:type owl:Class .
+
+:LocationBasedAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalAccident .
+
+:TidalFlatAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident .
+
+:RockyShoreAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident .
+
+:BreakwaterAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident .
+
+:DockAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident .
+
+:UninhabitedIslandAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident .
+
+:ActivityBasedAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalAccident .
+
+:CoastalActivityAccident rdf:type owl:Class ;
+    rdfs:subClassOf :ActivityBasedAccident .
+
+:WaterSurfaceActivityAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalActivityAccident .
+
+:UnderwaterActivityAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalActivityAccident .
+
+:GeneralActivityAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalActivityAccident .
+
+:WaterLeisureAccident rdf:type owl:Class ;
+    rdfs:subClassOf :ActivityBasedAccident .
+
+# ── CoastalLocation 계층 ─────────────────────────────
+
+:CoastalLocation rdf:type owl:Class .
+
+:TidalFlat rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation .
+
+:RockyShore rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation .
+
+:Breakwater rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation .
+
+:Dock rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation .
+
+:UninhabitedIsland rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation .
+
+# ── Person 계층 ──────────────────────────────────────
+
+:Person rdf:type owl:Class .
+
+:Victim rdf:type owl:Class ;
+    rdfs:subClassOf :Person .
+
+:SafetyManager rdf:type owl:Class ;
+    rdfs:subClassOf :Person .
+
+:CoastGuardOfficer rdf:type owl:Class ;
+    rdfs:subClassOf :Person .
+
+# ── Organization 계층 ────────────────────────────────
+
+:Organization rdf:type owl:Class .
+
+:KoreaCoastGuard rdf:type owl:Class ;
+    rdfs:subClassOf :Organization .
+
+:LocalGovernment rdf:type owl:Class ;
+    rdfs:subClassOf :Organization .
+
+# ── PreventionPlan 계층 ──────────────────────────────
+
+:PreventionPlan rdf:type owl:Class .
+
+:CoastalAccidentPreventionPlan rdf:type owl:Class ;
+    rdfs:subClassOf :PreventionPlan .
