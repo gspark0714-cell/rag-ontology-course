@@ -1,0 +1,221 @@
+배경
+선반 제조업체가 있습니다. 이 회사는 다양한 종류의 선반을 만들어서 납품합니다. 선반을 만들려면 부품이 필요하고, 부품을 만들려면 원자재가 필요합니다. 선반은 여러 공장에서 만들어지고, 각 공장에는 작업자와 설비가 있습니다. 만들어진 선반은 고객사에 납품됩니다.
+
+업무 설명(클래스 추출해보세요)
+선반의 종류는 크게 목재선반, 금속선반, 플라스틱선반으로 
+나뉩니다. 목재선반은 원목선반과 합판선반으로 나뉩니다. 
+금속선반은 스틸선반과 알루미늄선반으로 나뉩니다.
+
+선반은 여러 부품으로 구성됩니다. 주요 부품으로는 선반판, 
+프레임, 볼트, 브라켓이 있습니다. 부품은 원자재로 만들어집니다. 
+원자재의 종류는 목재, 철강, 알루미늄, 플라스틱이 있습니다.
+
+선반은 공장에서 생산됩니다. 공장에는 작업자와 생산설비가 
+있습니다. 작업자는 일반작업자와 품질검사원으로 나뉩니다. 
+생산설비는 절삭기, 용접기, 도장기로 나뉩니다.
+
+생산된 선반은 고객사에 납품됩니다. 고객사는 개인고객과 
+기업고객으로 나뉩니다. 납품 시 납품서가 발행됩니다. 
+납품서에는 납품일자, 수량, 단가가 기록됩니다.
+
+선반마다 품질검사를 합니다. 품질검사 결과는 합격과 
+불합격으로 나뉩니다. 불합격 선반은 재작업 또는 폐기됩니다.
+
+
+
+1) 클래스 후보 추출
+2) is a, has a 관계 구분
+3) 클래스 계층 관계 구성
+4) Object Property 추출
+5) Data Property 추출
+
+
+Object Property 후보
+Data Property 후보
+
+-----------------------------------------------------------------
+#shelf.ttl로 저장
+
+@prefix : <http://www.example.org/shelf#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://www.example.org/shelf>
+    rdf:type owl:Ontology .
+
+# ── Product 계층 ──────────────────────────
+:Product rdf:type owl:Class .
+
+:Shelf rdf:type owl:Class ;
+    rdfs:subClassOf :Product ;
+    rdfs:label "선반"@ko .
+
+:WoodenShelf rdf:type owl:Class ;
+    rdfs:subClassOf :Shelf ;
+    rdfs:label "목재선반"@ko .
+
+:SolidWoodShelf rdf:type owl:Class ;
+    rdfs:subClassOf :WoodenShelf ;
+    rdfs:label "원목선반"@ko .
+
+:PlywoodShelf rdf:type owl:Class ;
+    rdfs:subClassOf :WoodenShelf ;
+    rdfs:label "합판선반"@ko .
+
+:MetalShelf rdf:type owl:Class ;
+    rdfs:subClassOf :Shelf ;
+    rdfs:label "금속선반"@ko .
+
+:SteelShelf rdf:type owl:Class ;
+    rdfs:subClassOf :MetalShelf ;
+    rdfs:label "스틸선반"@ko .
+
+:AluminumShelf rdf:type owl:Class ;
+    rdfs:subClassOf :MetalShelf ;
+    rdfs:label "알루미늄선반"@ko .
+
+:PlasticShelf rdf:type owl:Class ;
+    rdfs:subClassOf :Shelf ;
+    rdfs:label "플라스틱선반"@ko .
+
+# ── Component 계층 ────────────────────────
+:Component rdf:type owl:Class ;
+    rdfs:label "부품"@ko .
+
+:ShelfBoard rdf:type owl:Class ;
+    rdfs:subClassOf :Component ;
+    rdfs:label "선반판"@ko .
+
+:Frame rdf:type owl:Class ;
+    rdfs:subClassOf :Component ;
+    rdfs:label "프레임"@ko .
+
+:Bolt rdf:type owl:Class ;
+    rdfs:subClassOf :Component ;
+    rdfs:label "볼트"@ko .
+
+:Bracket rdf:type owl:Class ;
+    rdfs:subClassOf :Component ;
+    rdfs:label "브라켓"@ko .
+
+# ── RawMaterial 계층 ──────────────────────
+:RawMaterial rdf:type owl:Class ;
+    rdfs:label "원자재"@ko .
+
+:Wood rdf:type owl:Class ;
+    rdfs:subClassOf :RawMaterial ;
+    rdfs:label "목재"@ko .
+
+:Steel rdf:type owl:Class ;
+    rdfs:subClassOf :RawMaterial ;
+    rdfs:label "철강"@ko .
+
+:Aluminum rdf:type owl:Class ;
+    rdfs:subClassOf :RawMaterial ;
+    rdfs:label "알루미늄"@ko .
+
+:Plastic rdf:type owl:Class ;
+    rdfs:subClassOf :RawMaterial ;
+    rdfs:label "플라스틱"@ko .
+
+# ── Facility 계층 ─────────────────────────
+:Facility rdf:type owl:Class ;
+    rdfs:label "시설"@ko .
+
+:Factory rdf:type owl:Class ;
+    rdfs:subClassOf :Facility ;
+    rdfs:label "공장"@ko .
+
+# ── Equipment 계층 ────────────────────────
+:Equipment rdf:type owl:Class ;
+    rdfs:label "설비"@ko .
+
+:CuttingMachine rdf:type owl:Class ;
+    rdfs:subClassOf :Equipment ;
+    rdfs:label "절삭기"@ko .
+
+:WeldingMachine rdf:type owl:Class ;
+    rdfs:subClassOf :Equipment ;
+    rdfs:label "용접기"@ko .
+
+:PaintingMachine rdf:type owl:Class ;
+    rdfs:subClassOf :Equipment ;
+    rdfs:label "도장기"@ko .
+
+# ── Person 계층 ───────────────────────────
+:Person rdf:type owl:Class ;
+    rdfs:label "사람"@ko .
+
+:Worker rdf:type owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "작업자"@ko .
+
+:GeneralWorker rdf:type owl:Class ;
+    rdfs:subClassOf :Worker ;
+    rdfs:label "일반작업자"@ko .
+
+:QualityInspector rdf:type owl:Class ;
+    rdfs:subClassOf :Worker ;
+    rdfs:label "품질검사원"@ko .
+
+# ── Customer 계층 ─────────────────────────
+:Customer rdf:type owl:Class ;
+    rdfs:label "고객"@ko .
+
+:IndividualCustomer rdf:type owl:Class ;
+    rdfs:subClassOf :Customer ;
+    rdfs:label "개인고객"@ko .
+
+:CorporateCustomer rdf:type owl:Class ;
+    rdfs:subClassOf :Customer ;
+    rdfs:label "기업고객"@ko .
+
+# ── Document 계층 ─────────────────────────
+:Document rdf:type owl:Class ;
+    rdfs:label "문서"@ko .
+
+:DeliveryNote rdf:type owl:Class ;
+    rdfs:subClassOf :Document ;
+    rdfs:label "납품서"@ko .
+
+# ── QualityInspection 계층 ────────────────
+:QualityInspection rdf:type owl:Class ;
+    rdfs:label "품질검사"@ko .
+
+:PassedInspection rdf:type owl:Class ;
+    rdfs:subClassOf :QualityInspection ;
+    rdfs:label "합격"@ko .
+
+:FailedInspection rdf:type owl:Class ;
+    rdfs:subClassOf :QualityInspection ;
+    rdfs:label "불합격"@ko .
+
+# ── Disjoint 선언 ─────────────────────────
+:WoodenShelf owl:disjointWith :MetalShelf .
+:WoodenShelf owl:disjointWith :PlasticShelf .
+:MetalShelf owl:disjointWith :PlasticShelf .
+
+:SolidWoodShelf owl:disjointWith :PlywoodShelf .
+:SteelShelf owl:disjointWith :AluminumShelf .
+
+:Wood owl:disjointWith :Steel .
+:Wood owl:disjointWith :Aluminum .
+:Wood owl:disjointWith :Plastic .
+:Steel owl:disjointWith :Aluminum .
+:Steel owl:disjointWith :Plastic .
+:Aluminum owl:disjointWith :Plastic .
+
+:IndividualCustomer owl:disjointWith :CorporateCustomer .
+:GeneralWorker owl:disjointWith :QualityInspector .
+:PassedInspection owl:disjointWith :FailedInspection .
+
+
+
+
+
+
+
+
+
+
+

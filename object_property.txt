@@ -1,0 +1,37 @@
+# ── Object Properties ────────────────────────────────
+
+:occurredAt rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range :CoastalLocation ;
+    rdfs:label "발생장소"@ko .
+
+:involves rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range :Person ;
+    rdfs:label "관련된 사람"@ko .
+
+:hasVictim rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range :Victim ;
+    rdfs:label "피해자"@ko .
+
+:managedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalLocation ;
+    rdfs:range :Organization ;
+    rdfs:label "관할 기관"@ko .
+
+:hasSafetyManager rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalLocation ;
+    rdfs:range :SafetyManager ;
+    rdfs:label "안전관리요원"@ko .
+
+:belongsTo rdf:type owl:ObjectProperty ;
+    rdfs:domain :Person ;
+    rdfs:range :Organization ;
+    rdfs:label "소속 기관"@ko .
+
+:isLocationOf rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalLocation ;
+    rdfs:range :CoastalAccident ;
+    owl:inverseOf :occurredAt ;
+    rdfs:label "사고 발생지"@ko .
