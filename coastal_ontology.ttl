@@ -1,0 +1,632 @@
+@prefix : <http://www.example.org/coastal#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.example.org/coastal>
+    rdf:type owl:Ontology .
+
+# ════════════════════════════════════════════════════
+#  클래스 계층 구조
+# ════════════════════════════════════════════════════
+
+# ── CoastalAccident 계층 ──────────────────────────────
+
+:CoastalAccident rdf:type owl:Class ;
+    rdfs:label "연안사고"@ko ;
+    rdfs:label "Coastal Accident"@en ;
+    rdfs:comment "연안해역에서 발생하는 인명에 위해를 끼치는 사고. 해양사고는 제외."@ko .
+
+:LocationBasedAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalAccident ;
+    rdfs:label "장소 기반 사고"@ko .
+
+:TidalFlatAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident ;
+    rdfs:label "갯벌사고"@ko ;
+    owl:disjointWith :RockyShoreAccident, :BreakwaterAccident, :DockAccident, :UninhabitedIslandAccident .
+
+:RockyShoreAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident ;
+    rdfs:label "갯바위사고"@ko ;
+    owl:disjointWith :BreakwaterAccident, :DockAccident, :UninhabitedIslandAccident .
+
+:BreakwaterAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident ;
+    rdfs:label "방파제사고"@ko ;
+    owl:disjointWith :DockAccident, :UninhabitedIslandAccident .
+
+:DockAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident ;
+    rdfs:label "선착장사고"@ko ;
+    owl:disjointWith :UninhabitedIslandAccident .
+
+:UninhabitedIslandAccident rdf:type owl:Class ;
+    rdfs:subClassOf :LocationBasedAccident ;
+    rdfs:label "무인도사고"@ko .
+
+:ActivityBasedAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalAccident ;
+    rdfs:label "활동 기반 사고"@ko ;
+    owl:disjointWith :LocationBasedAccident .
+
+:CoastalActivityAccident rdf:type owl:Class ;
+    rdfs:subClassOf :ActivityBasedAccident ;
+    rdfs:label "연안체험활동사고"@ko ;
+    owl:disjointWith :WaterLeisureAccident .
+
+:WaterSurfaceActivityAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalActivityAccident ;
+    rdfs:label "수상형 연안체험활동사고"@ko ;
+    owl:disjointWith :UnderwaterActivityAccident, :GeneralActivityAccident .
+
+:UnderwaterActivityAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalActivityAccident ;
+    rdfs:label "수중형 연안체험활동사고"@ko ;
+    owl:disjointWith :GeneralActivityAccident .
+
+:GeneralActivityAccident rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalActivityAccident ;
+    rdfs:label "일반형 연안체험활동사고"@ko .
+
+:WaterLeisureAccident rdf:type owl:Class ;
+    rdfs:subClassOf :ActivityBasedAccident ;
+    rdfs:label "수상레저사고"@ko .
+
+# ── CoastalLocation 계층 ─────────────────────────────
+
+:CoastalLocation rdf:type owl:Class ;
+    rdfs:label "연안지형"@ko .
+
+:TidalFlat rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation ;
+    rdfs:label "갯벌"@ko ;
+    owl:disjointWith :RockyShore, :Breakwater, :Dock, :UninhabitedIsland .
+
+:RockyShore rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation ;
+    rdfs:label "갯바위"@ko ;
+    owl:disjointWith :Breakwater, :Dock, :UninhabitedIsland .
+
+:Breakwater rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation ;
+    rdfs:label "방파제"@ko ;
+    owl:disjointWith :Dock, :UninhabitedIsland .
+
+:Dock rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation ;
+    rdfs:label "선착장"@ko ;
+    owl:disjointWith :UninhabitedIsland .
+
+:UninhabitedIsland rdf:type owl:Class ;
+    rdfs:subClassOf :CoastalLocation ;
+    rdfs:label "무인도서"@ko .
+
+# ── Person 계층 ──────────────────────────────────────
+
+:Person rdf:type owl:Class ;
+    rdfs:label "사람"@ko .
+
+:Victim rdf:type owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "피해자"@ko ;
+    owl:disjointWith :CoastGuardOfficer .
+
+:SafetyManager rdf:type owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "안전관리요원"@ko ;
+    owl:disjointWith :CoastGuardOfficer .
+
+:CoastGuardOfficer rdf:type owl:Class ;
+    rdfs:subClassOf :Person ;
+    rdfs:label "해경관원"@ko .
+
+:Minor rdf:type owl:Class ;
+    rdfs:label "미성년자"@ko ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasAge ;
+              owl:someValuesFrom
+                [ rdf:type rdfs:Datatype ;
+                  owl:onDatatype xsd:integer ;
+                  owl:withRestrictions ( [ xsd:maxExclusive "18"^^xsd:integer ] )
+                ]
+            ]
+        )
+    ] .
+
+:Elder rdf:type owl:Class ;
+    rdfs:label "노인"@ko ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasAge ;
+              owl:someValuesFrom
+                [ rdf:type rdfs:Datatype ;
+                  owl:onDatatype xsd:integer ;
+                  owl:withRestrictions ( [ xsd:minInclusive "65"^^xsd:integer ] )
+                ]
+            ]
+        )
+    ] .
+
+# ── Organization 계층 ────────────────────────────────
+
+:Organization rdf:type owl:Class ;
+    rdfs:label "기관"@ko .
+
+:KoreaCoastGuard rdf:type owl:Class ;
+    rdfs:subClassOf :Organization ;
+    rdfs:label "해양경찰청"@ko ;
+    owl:disjointWith :LocalGovernment .
+
+:LocalGovernment rdf:type owl:Class ;
+    rdfs:subClassOf :Organization ;
+    rdfs:label "지자체"@ko .
+
+# ── PreventionPlan 계층 ──────────────────────────────
+
+:PreventionPlan rdf:type owl:Class ;
+    rdfs:label "예방계획"@ko .
+
+:CoastalAccidentPreventionPlan rdf:type owl:Class ;
+    rdfs:subClassOf :PreventionPlan ;
+    rdfs:label "연안사고예방기본계획"@ko .
+
+# ════════════════════════════════════════════════════
+#  Object Properties
+# ════════════════════════════════════════════════════
+
+:occurredAt rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range :CoastalLocation ;
+    owl:inverseOf :isLocationOf ;
+    rdfs:label "발생장소"@ko .
+
+:isLocationOf rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalLocation ;
+    rdfs:range :CoastalAccident ;
+    rdfs:label "사고 발생지"@ko .
+
+:involves rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range :Person ;
+    rdfs:label "관련된 사람"@ko .
+
+:hasVictim rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :involves ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range :Victim ;
+    rdfs:label "피해자"@ko .
+
+:managedBy rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalLocation ;
+    rdfs:range :Organization ;
+    rdfs:label "관할 기관"@ko .
+
+:hasSafetyManager rdf:type owl:ObjectProperty ;
+    rdfs:domain :CoastalLocation ;
+    rdfs:range :SafetyManager ;
+    rdfs:label "안전관리요원"@ko .
+
+:belongsTo rdf:type owl:ObjectProperty ;
+    rdfs:domain :Person ;
+    rdfs:range :Organization ;
+    rdfs:label "소속 기관"@ko .
+
+:establishes rdf:type owl:ObjectProperty ;
+    rdfs:domain :Organization ;
+    rdfs:range :PreventionPlan ;
+    rdfs:label "수립하다"@ko .
+
+# ════════════════════════════════════════════════════
+#  Data Properties
+# ════════════════════════════════════════════════════
+
+:hasCasualty rdf:type owl:DatatypeProperty ;
+    rdf:type owl:FunctionalProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range xsd:integer ;
+    rdfs:label "사망자수"@ko .
+
+:hasInjured rdf:type owl:DatatypeProperty ;
+    rdf:type owl:FunctionalProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range xsd:integer ;
+    rdfs:label "부상자수"@ko .
+
+:hasAccidentDate rdf:type owl:DatatypeProperty ;
+    rdf:type owl:FunctionalProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range xsd:date ;
+    rdfs:label "발생일자"@ko .
+
+:hasAccidentTime rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range xsd:time ;
+    rdfs:label "발생시각"@ko .
+
+:hasDescription rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range xsd:string ;
+    rdfs:label "사고설명"@ko .
+
+:hasWeatherCondition rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CoastalAccident ;
+    rdfs:range xsd:string ;
+    rdfs:label "기상상태"@ko .
+
+:hasName rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string ;
+    rdfs:label "이름"@ko .
+
+:hasAge rdf:type owl:DatatypeProperty ;
+    rdf:type owl:FunctionalProperty ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:integer ;
+    rdfs:label "나이"@ko .
+
+:hasOrganizationName rdf:type owl:DatatypeProperty ;
+    rdf:type owl:FunctionalProperty ;
+    rdfs:domain :Organization ;
+    rdfs:range xsd:string ;
+    rdfs:label "기관명"@ko .
+
+:hasPlanCycle rdf:type owl:DatatypeProperty ;
+    rdf:type owl:FunctionalProperty ;
+    rdfs:domain :PreventionPlan ;
+    rdfs:range xsd:integer ;
+    rdfs:label "수립주기(년)"@ko .
+
+:hasLocationName rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CoastalLocation ;
+    rdfs:range xsd:string ;
+    rdfs:label "장소명"@ko .
+
+# ════════════════════════════════════════════════════
+#  OWL Restrictions (SubClassOf)
+# ════════════════════════════════════════════════════
+
+# 연안사고는 반드시 연안지형에서 발생해야 한다
+:CoastalAccident rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :occurredAt ;
+      owl:someValuesFrom :CoastalLocation ] .
+
+# 연안사고의 발생장소는 반드시 연안지형이어야 한다
+:CoastalAccident rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :occurredAt ;
+      owl:allValuesFrom :CoastalLocation ] .
+
+# 연안사고는 반드시 피해자가 있어야 한다
+:CoastalAccident rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :hasVictim ;
+      owl:someValuesFrom :Person ] .
+
+# 사망자 수는 정확히 하나
+:CoastalAccident rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :hasCasualty ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:integer ] .
+
+# 발생일자는 정확히 하나
+:CoastalAccident rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :hasAccidentDate ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:date ] .
+
+# 갯벌사고는 반드시 갯벌에서 발생
+:TidalFlatAccident rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :occurredAt ;
+      owl:someValuesFrom :TidalFlat ] .
+
+:TidalFlatAccident rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :occurredAt ;
+      owl:allValuesFrom :TidalFlat ] .
+
+# 안전관리요원은 반드시 소속 기관이 있어야 한다
+:SafetyManager rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :belongsTo ;
+      owl:someValuesFrom :Organization ] .
+
+# 해양경찰청장은 반드시 연안사고예방기본계획을 수립해야 한다
+:KoreaCoastGuard rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :establishes ;
+      owl:someValuesFrom :CoastalAccidentPreventionPlan ] .
+
+# 연안사고예방기본계획 수립 주기는 정확히 하나
+:CoastalAccidentPreventionPlan rdfs:subClassOf
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :hasPlanCycle ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:integer ] .
+
+# ════════════════════════════════════════════════════
+#  Defined Classes (EquivalentTo) — 추론기 자동 분류
+# ════════════════════════════════════════════════════
+
+# 중대사고: 사망자 1명 이상인 연안사고
+:MajorAccident rdf:type owl:Class ;
+    rdfs:label "중대사고"@ko ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :CoastalAccident
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasCasualty ;
+              owl:someValuesFrom
+                [ rdf:type rdfs:Datatype ;
+                  owl:onDatatype xsd:integer ;
+                  owl:withRestrictions ( [ xsd:minInclusive "1"^^xsd:integer ] )
+                ]
+            ]
+        )
+    ] .
+
+# 미성년자 피해 사고
+:ChildVictimAccident rdf:type owl:Class ;
+    rdfs:label "미성년자 피해 사고"@ko ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :CoastalAccident
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasVictim ;
+              owl:someValuesFrom :Minor ]
+        )
+    ] .
+
+# 고위험 연안지형: 사고가 2건 이상 발생한 장소
+:HighRiskLocation rdf:type owl:Class ;
+    rdfs:label "고위험 연안지형"@ko ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :CoastalLocation
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :isLocationOf ;
+              owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+              owl:onClass :CoastalAccident ]
+        )
+    ] .
+
+# 취약계층 피해 사고: 미성년자 또는 노인 피해자
+:VulnerableVictimAccident rdf:type owl:Class ;
+    rdfs:label "취약계층 피해 사고"@ko ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :CoastalAccident
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasVictim ;
+              owl:someValuesFrom [
+                  rdf:type owl:Class ;
+                  owl:unionOf ( :Minor :Elder )
+              ]
+            ]
+        )
+    ] .
+
+# 안전관리 사각지대 사고: 안전관리요원이 없었던 사고
+:UnmanagedAccident rdf:type owl:Class ;
+    rdfs:label "안전관리 사각지대 사고"@ko ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :CoastalAccident
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasSafetyManager ;
+              owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+              owl:onClass :SafetyManager ]
+        )
+    ] .
+
+# 집중관리 대상 사고: (사망자 1명 이상 OR 미성년자 피해) AND 안전관리요원 없음
+:PriorityManagementAccident rdf:type owl:Class ;
+    rdfs:label "집중관리 대상 사고"@ko ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :CoastalAccident
+            [ rdf:type owl:Class ;
+              owl:unionOf (
+                  [ rdf:type owl:Restriction ;
+                    owl:onProperty :hasCasualty ;
+                    owl:someValuesFrom
+                      [ rdf:type rdfs:Datatype ;
+                        owl:onDatatype xsd:integer ;
+                        owl:withRestrictions ( [ xsd:minInclusive "1"^^xsd:integer ] )
+                      ]
+                  ]
+                  [ rdf:type owl:Restriction ;
+                    owl:onProperty :hasVictim ;
+                    owl:someValuesFrom :Minor ]
+              )
+            ]
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasSafetyManager ;
+              owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+              owl:onClass :SafetyManager ]
+        )
+    ] .
+
+# ════════════════════════════════════════════════════
+#  Individuals (실습용 데이터)
+# ════════════════════════════════════════════════════
+
+# ── 기관 ─────────────────────────────────────────────
+
+:Organization_KCG rdf:type :KoreaCoastGuard ;
+    :hasOrganizationName "해양경찰청"^^xsd:string .
+
+:Organization_Boryeong rdf:type :LocalGovernment ;
+    :hasOrganizationName "보령시"^^xsd:string .
+
+# ── 연안지형 ──────────────────────────────────────────
+
+:TidalFlat_Boryeong rdf:type :TidalFlat ;
+    :hasLocationName "보령 갯벌"^^xsd:string ;
+    :managedBy :Organization_KCG .
+
+:Breakwater_Incheon rdf:type :Breakwater ;
+    :hasLocationName "인천 방파제"^^xsd:string ;
+    :managedBy :Organization_KCG .
+
+:RockyShore_Busan rdf:type :RockyShore ;
+    :hasLocationName "부산 갯바위"^^xsd:string ;
+    :managedBy :Organization_KCG .
+
+:TidalFlat_Taean rdf:type :TidalFlat ;
+    :hasLocationName "태안 갯벌"^^xsd:string ;
+    :managedBy :Organization_KCG .
+
+# ── 사람 ─────────────────────────────────────────────
+
+:Person_001 rdf:type :Victim ;
+    :hasName "피해자1"^^xsd:string ;
+    :hasAge "16"^^xsd:integer .
+
+:Person_002 rdf:type :Victim ;
+    :hasName "피해자2"^^xsd:string ;
+    :hasAge "45"^^xsd:integer .
+
+:Person_003 rdf:type :Victim ;
+    :hasName "피해자3"^^xsd:string ;
+    :hasAge "70"^^xsd:integer .
+
+:Person_004 rdf:type :Victim ;
+    :hasName "피해자4"^^xsd:string ;
+    :hasAge "14"^^xsd:integer .
+
+:Person_005 rdf:type :Victim ;
+    :hasName "피해자5"^^xsd:string ;
+    :hasAge "25"^^xsd:integer .
+
+:Person_006 rdf:type :SafetyManager ;
+    :hasName "안전관리요원1"^^xsd:string ;
+    :hasAge "35"^^xsd:integer ;
+    :belongsTo :Organization_KCG .
+
+:Person_007 rdf:type :Victim ;
+    :hasName "피해자7"^^xsd:string ;
+    :hasAge "67"^^xsd:integer .
+
+# 태안 사고 피해자들
+:Person_Student001 rdf:type :Victim ;
+    :hasName "피해자A"^^xsd:string ;
+    :hasAge "17"^^xsd:integer .
+
+:Person_Student002 rdf:type :Victim ;
+    :hasName "피해자B"^^xsd:string ;
+    :hasAge "16"^^xsd:integer .
+
+:Person_Student003 rdf:type :Victim ;
+    :hasName "피해자C"^^xsd:string ;
+    :hasAge "17"^^xsd:integer .
+
+# ── 연안사고 ──────────────────────────────────────────
+
+# 사고 001: 보령 갯벌 사고 (MajorAccident, ChildVictimAccident 추론 예정)
+:Accident_001 rdf:type :TidalFlatAccident ;
+    :occurredAt :TidalFlat_Boryeong ;
+    :hasVictim :Person_001, :Person_002 ;
+    :hasCasualty "2"^^xsd:integer ;
+    :hasInjured "0"^^xsd:integer ;
+    :hasAccidentDate "2022-08-15"^^xsd:date ;
+    :hasWeatherCondition "맑음"^^xsd:string ;
+    :hasDescription "보령 갯벌 익수사고"^^xsd:string .
+
+# 사고 002: 인천 방파제 사고 (MajorAccident 아님, ElderVictim 추론 예정)
+:Accident_002 rdf:type :BreakwaterAccident ;
+    :occurredAt :Breakwater_Incheon ;
+    :hasVictim :Person_003 ;
+    :hasCasualty "0"^^xsd:integer ;
+    :hasInjured "1"^^xsd:integer ;
+    :hasAccidentDate "2023-07-20"^^xsd:date ;
+    :hasWeatherCondition "흐림"^^xsd:string ;
+    :hasDescription "인천 방파제 추락사고"^^xsd:string .
+
+# 사고 003: 보령 갯벌 두 번째 사고 (MajorAccident, ChildVictimAccident 추론 예정)
+:Accident_003 rdf:type :TidalFlatAccident ;
+    :occurredAt :TidalFlat_Boryeong ;
+    :hasVictim :Person_004 ;
+    :hasCasualty "1"^^xsd:integer ;
+    :hasInjured "0"^^xsd:integer ;
+    :hasAccidentDate "2023-05-10"^^xsd:date ;
+    :hasWeatherCondition "맑음"^^xsd:string ;
+    :hasDescription "보령 갯벌 고립사고"^^xsd:string .
+
+# 사고 004: 부산 갯바위 사고 (UnmanagedAccident 추론 예정)
+:Accident_004 rdf:type :ActivityBasedAccident ;
+    :occurredAt :RockyShore_Busan ;
+    :hasVictim :Person_005 ;
+    :hasCasualty "0"^^xsd:integer ;
+    :hasInjured "1"^^xsd:integer ;
+    :hasAccidentDate "2023-08-05"^^xsd:date ;
+    :hasWeatherCondition "흐림"^^xsd:string ;
+    :hasDescription "부산 갯바위 낙상사고"^^xsd:string .
+
+# 사고 005: 보령 갯벌 세 번째 사고
+# (MajorAccident, VulnerableVictimAccident 추론 예정)
+# → TidalFlat_Boryeong에 사고 3건: HighRiskLocation 추론 예정
+:Accident_005 rdf:type :CoastalActivityAccident ;
+    :occurredAt :TidalFlat_Boryeong ;
+    :hasVictim :Person_007 ;
+    :hasCasualty "3"^^xsd:integer ;
+    :hasInjured "0"^^xsd:integer ;
+    :hasAccidentDate "2021-07-30"^^xsd:date ;
+    :hasWeatherCondition "흐림"^^xsd:string ;
+    :hasDescription "보령 갯벌 연안체험활동 사고"^^xsd:string .
+
+# 태안 사설 유사해병대 캠프 사고 (2013)
+:Accident_Taean2013 rdf:type :ActivityBasedAccident ;
+    :occurredAt :TidalFlat_Taean ;
+    :hasVictim :Person_Student001, :Person_Student002, :Person_Student003 ;
+    :hasCasualty "5"^^xsd:integer ;
+    :hasInjured "0"^^xsd:integer ;
+    :hasAccidentDate "2013-07-18"^^xsd:date ;
+    :hasWeatherCondition "흐림"^^xsd:string ;
+    :hasDescription "태안 사설 유사해병대 캠프 익수사고"^^xsd:string .
+ 
+# ── 예방계획 ──────────────────────────────────────────
+
+:Plan_2024 rdf:type :CoastalAccidentPreventionPlan ;
+    :hasPlanCycle "5"^^xsd:integer ;
+    rdfs:label "2024년 연안사고예방기본계획"@ko .
+
+# ── AllDifferent 선언 ─────────────────────────────────
+# (OWL Open World: 이름이 달라도 같은 Individual일 수 있음 → 명시 필요)
+
+[] rdf:type owl:AllDifferent ;
+   owl:distinctMembers (
+       :Person_001 :Person_002 :Person_003
+       :Person_004 :Person_005 :Person_006 :Person_007
+       :Person_Student001 :Person_Student002 :Person_Student003
+   ) .
+
+[] rdf:type owl:AllDifferent ;
+   owl:distinctMembers (
+       :Accident_001 :Accident_002 :Accident_003
+       :Accident_004 :Accident_005 :Accident_Taean2013
+   ) .
+
+[] rdf:type owl:AllDifferent ;
+   owl:distinctMembers (
+       :TidalFlat_Boryeong :TidalFlat_Taean
+       :Breakwater_Incheon :RockyShore_Busan
+   ) .
