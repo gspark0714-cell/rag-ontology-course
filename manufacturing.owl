@@ -75,8 +75,8 @@
 
 <owl:NamedIndividual rdf:about="#모터">
   <rdf:type rdf:resource="#부품"/>
-  <포함한다 rdf:resource="#베어링"/>
   <포함한다 rdf:resource="#샤프트"/>
+  <포함한다 rdf:resource="#베어링"/>
   <무게 rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.0</무게>
 </owl:NamedIndividual>
 
