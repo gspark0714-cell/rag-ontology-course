@@ -1,0 +1,65 @@
+CREATE
+  (s1:Ship {id:"LNG-001", name:"한화오션 1호", type:"LNG운반선", status:"건조중", dockDate:"2025-01-01"}),
+  (s2:Ship {id:"CON-002", name:"한화오션 2호", type:"컨테이너선", status:"설계중", dockDate:"2025-03-01"}),
+  (s3:Ship {id:"TAN-003", name:"한화오션 3호", type:"탱커", status:"완공", dockDate:"2024-06-01"}),
+
+  (b1:Block {id:"B-101", weight:450, status:"용접완료", zone:"선수", progress:100}),
+  (b2:Block {id:"B-202", weight:380, status:"도장중",   zone:"선미", progress:60}),
+  (b3:Block {id:"B-303", weight:520, status:"대기중",   zone:"기관실", progress:0}),
+  (b4:Block {id:"B-404", weight:310, status:"용접중",   zone:"갑판", progress:40}),
+  (b5:Block {id:"B-505", weight:290, status:"용접완료", zone:"선교", progress:100}),
+  (b6:Block {id:"B-606", weight:410, status:"검사중",   zone:"기관실", progress:80}),
+
+  (p1:Process {id:"W-01", type:"용접", method:"SAW",   line:"1도크", duration:14}),
+  (p2:Process {id:"W-02", type:"용접", method:"FCAW",  line:"2도크", duration:10}),
+  (p3:Process {id:"P-01", type:"도장", method:"에폭시", line:"도장동", duration:7}),
+  (p4:Process {id:"I-01", type:"검사", method:"UT검사", line:"품질동", duration:3}),
+  (p5:Process {id:"W-03", type:"용접", method:"TIG",   line:"3도크", duration:8}),
+
+  (w1:Worker {name:"김철수", skill:"용접", grade:"특급", dept:"선체부", salary:5800}),
+  (w2:Worker {name:"이영희", skill:"도장", grade:"1급",  dept:"도장부", salary:4200}),
+  (w3:Worker {name:"박민수", skill:"용접", grade:"1급",  dept:"선체부", salary:4500}),
+  (w4:Worker {name:"최지훈", skill:"검사", grade:"특급", dept:"품질부", salary:5500}),
+  (w5:Worker {name:"정수연", skill:"용접", grade:"2급",  dept:"선체부", salary:3800}),
+  (w6:Worker {name:"한동훈", skill:"도장", grade:"1급",  dept:"도장부", salary:4100}),
+
+  (e1:Equipment {id:"CR-01", type:"골리앗크레인", capacity:900, status:"가동중"}),
+  (e2:Equipment {id:"WM-01", type:"자동용접기",   capacity:500, status:"가동중"}),
+  (e3:Equipment {id:"UT-01", type:"초음파검사기", capacity:0,   status:"점검중"}),
+  (e4:Equipment {id:"WM-02", type:"자동용접기",   capacity:300, status:"가동중"}),
+
+  (m1:Material {id:"ST-01", type:"강판",   spec:"AH36",  stock:200, unit:"t"}),
+  (m2:Material {id:"WR-01", type:"용접봉", spec:"E7016", stock:500, unit:"kg"}),
+  (m3:Material {id:"PT-01", type:"도료",   spec:"에폭시", stock:300, unit:"L"}),
+
+  (s1)-[:CONSISTS_OF]->(b1), (s1)-[:CONSISTS_OF]->(b2),
+  (s1)-[:CONSISTS_OF]->(b3), (s2)-[:CONSISTS_OF]->(b4),
+  (s2)-[:CONSISTS_OF]->(b5), (s3)-[:CONSISTS_OF]->(b6),
+
+  (b1)-[:PROCESSED_BY {seq:1, startDate:"2025-01-10"}]->(p1),
+  (b1)-[:PROCESSED_BY {seq:2, startDate:"2025-01-25"}]->(p4),
+  (b2)-[:PROCESSED_BY {seq:1, startDate:"2025-01-12"}]->(p2),
+  (b2)-[:PROCESSED_BY {seq:2, startDate:"2025-01-23"}]->(p3),
+  (b3)-[:PROCESSED_BY {seq:1, startDate:"2025-02-01"}]->(p1),
+  (b4)-[:PROCESSED_BY {seq:1, startDate:"2025-01-20"}]->(p2),
+  (b5)-[:PROCESSED_BY {seq:1, startDate:"2025-01-15"}]->(p5),
+  (b6)-[:PROCESSED_BY {seq:1, startDate:"2024-12-01"}]->(p4),
+
+  (w1)-[:EXECUTES {since:"2025-01-10"}]->(p1),
+  (w3)-[:EXECUTES {since:"2025-01-12"}]->(p2),
+  (w2)-[:EXECUTES {since:"2025-01-23"}]->(p3),
+  (w4)-[:EXECUTES {since:"2025-01-25"}]->(p4),
+  (w5)-[:EXECUTES {since:"2025-01-15"}]->(p5),
+  (w6)-[:EXECUTES {since:"2025-01-23"}]->(p3),
+
+  (e1)-[:USED_IN]->(p1), (e1)-[:USED_IN]->(p2),
+  (e2)-[:USED_IN]->(p1), (e4)-[:USED_IN]->(p2),
+  (e3)-[:USED_IN]->(p4),
+
+  (m1)-[:SUPPLIED_TO]->(p1), (m1)-[:SUPPLIED_TO]->(p2),
+  (m2)-[:SUPPLIED_TO]->(p1), (m2)-[:SUPPLIED_TO]->(p2),
+  (m3)-[:SUPPLIED_TO]->(p3)
+
+
+
+----------------------------------------------------------------------------------------------------------------
