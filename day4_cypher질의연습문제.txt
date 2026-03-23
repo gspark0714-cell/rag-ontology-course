@@ -1,0 +1,49 @@
+CREATE
+// 블록 노드들
+(b1:Block {id:"B-201", weight:"450t", status:"용접완료"}),
+(b2:Block {id:"B-202", weight:"380t", status:"도장중"}),
+(b3:Block {id:"B-203", weight:"520t", status:"대기중"}),
+
+// 공정 노드들
+(p1:Process {id:"W-07", method:"SAW", line:"2도크"}),
+(p2:Process {id:"W-08", method:"FCAW", line:"1도크"}),
+(p3:Process {id:"P-03", method:"도장", line:"도장동"}),
+
+// 작업자 노드들
+(w1:Worker {name:"김철수", skill:"용접", grade:"1급"}),
+(w2:Worker {name:"이영희", skill:"도장", grade:"2급"}),
+(w3:Worker {name:"박민수", skill:"용접", grade:"1급"}),
+
+// 설비 노드들
+(e1:Equipment {id:"CR-01", type:"크레인", capacity:"600t"}),
+(e2:Equipment {id:"WM-05", type:"용접기", capacity:"500A"}),
+
+// 관계
+(b1)-[:PROCESSED_BY {seq:3}]->(p1),
+(b2)-[:PROCESSED_BY {seq:1}]->(p2),
+(b2)-[:PROCESSED_BY {seq:2}]->(p3),
+(b3)-[:PROCESSED_BY {seq:1}]->(p1),
+(w1)-[:EXECUTES]->(p1),
+(w2)-[:EXECUTES]->(p3),
+(w3)-[:EXECUTES]->(p2),
+(e1)-[:USED_IN]->(p1),
+(e2)-[:USED_IN]->(p2)
+
+
+===================================
+9문항 풀어보세요 (30분)
+===================================
+기존 그래프 삭제 후 위 CREATE 문 실행하세요.
+
+Q1. 모든 블록의 id, status 조회
+Q2. 용접 스킬을 가진 작업자만 조회
+Q3. 2도크에서 진행되는 공정 조회
+Q4. 작업자가 담당하는 공정 조회
+Q5. 블록에 투입된 공정과 순서 조회
+Q6. 블록·공정·담당작업자 3단계 연결 조회
+Q7. 설비가 투입된 공정과 그 공정을 담당하는 작업자까지 조회
+Q8. 공정별 투입 인원 수와 설비 수 집계
+Q9. 공정이 2개 이상인 블록만 조회
+
+
+
