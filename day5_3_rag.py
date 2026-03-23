@@ -42,7 +42,7 @@ print(f"온톨로지 문서 수: {len(ontology_docs)}")
 # 4. PDF + 온톨로지 합쳐서 벡터 저장소 생성
 all_docs = docs + ontology_docs
 embeddings = OllamaEmbeddings(model="nomic-embed-text")
-print("\n=== 벡터 저장소 생성 중... (시간이 걸려요) ===")
+print("\n=== 벡터 저장소 생성 중... ===")
 vectorstore = FAISS.from_documents(all_docs, embeddings)
 print("벡터 저장소 생성 완료!")
 

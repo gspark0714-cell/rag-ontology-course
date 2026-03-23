@@ -4,7 +4,7 @@ from neo4j import GraphDatabase
 # 1. Neo4j 연결
 driver = GraphDatabase.driver(
     "bolt://127.0.0.1:7687",
-    auth=("neo4j", "password123")
+    auth=("neo4j", "12345678")
 )
 
 # 2. 온톨로지 생성

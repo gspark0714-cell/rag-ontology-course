@@ -2,7 +2,7 @@ from neo4j import GraphDatabase
 
 driver = GraphDatabase.driver(
     "bolt://127.0.0.1:7687",
-    auth=("neo4j", "password123")
+    auth=("neo4j", "12345678")
 )
 
 def clear_and_build(tx):
