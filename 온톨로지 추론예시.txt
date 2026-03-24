@@ -1,0 +1,47 @@
+protege에서 간단하게 클래스랑 속성 정의하고 추론되어 새로운
+클래스 관계가 생성되는걸로
+
+"부모인 사람" 은 자동으로 "어른" 으로 분류되도록 추론
+
+
+Step 1 — 클래스 만들기
+Classes 탭에서 owl:Thing 하위에 다음 클래스들을 추가:
+owl:Thing
+├── Person
+├── Adult
+└── Parent        ← 이게 추론으로 Adult가 될 예정
+추가 방법: 클래스 선택 후 상단 Add subclass 버튼 (동그라미+)
+
+Step 2 — Object Property 만들기
+Object Properties 탭에서:
+hasChild
+
+Characteristics: 아무것도 체크 안 해도 됨
+Domain: Person
+Range: Person
+
+
+Step 3 —  Defined Class (Equivalent Class) 설정
+Parent 클래스를 선택하고 Equivalent To 에 다음 추가:
+Person and (hasChild some Person)
+입력 방법:
+
+Parent 클래스 클릭
+오른쪽 패널 Equivalent To 옆 + 버튼
+Class expression editor에 입력:
+
+   Person and (hasChild some Person)
+
+Step 4 — Adult 조건 설정
+Adult 클래스 선택 후 SubClass Of 에:
+Person
+그리고 Parent 클래스 SubClass Of 에:
+Adult
+추가 → "부모는 어른이다" 명시
+
+Step 5 — Individual (개체) 추가
+Individuals 탭에서:
+이름타입속성 AlicePersonhasChild → BobBobPerson—
+
+Step 6 — 추론 실행
+Reasoner → HermiT → Start Reasoner
